@@ -1,0 +1,8 @@
+torch 
+torchaudio 
+transformers 
+librosa 
+numpy 
+demucs 
+pydub
+ffmpeg
