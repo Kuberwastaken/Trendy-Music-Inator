@@ -1,0 +1,5 @@
+yt-dlp
+numpy
+scipy
+librosa
+flask
