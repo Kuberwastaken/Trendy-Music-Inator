@@ -1,8 +1,11 @@
-# app.py
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from audio_processing import analyze_audio
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/trendy', methods=['POST'])
 def trendy():

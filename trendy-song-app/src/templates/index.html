@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendy Song App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Trendy Song App</h1>
+        <input type="text" id="youtubeLink" placeholder="Enter YouTube music link">
+        <button onclick="findTrendyParts()">Find Trendy Parts</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = (seconds % 60).toFixed(2);
+            return `${minutes}m ${secs}s`;
+        }
+
+        async function findTrendyParts() {
+            const youtubeLink = document.getElementById('youtubeLink').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Processing...';
+
+            const response = await fetch('/trendy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ youtube_link: youtubeLink })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                const start = formatTime(data.trendy_parts.start);
+                const end = formatTime(data.trendy_parts.end);
+                resultDiv.innerHTML = `Trendy part starts at ${start} and ends at ${end}.`;
+            } else {
+                resultDiv.innerHTML = `Error: ${data.error}`;
+            }
+        }
+    </script>
+</body>
+</html>

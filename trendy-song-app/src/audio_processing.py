@@ -10,16 +10,22 @@ def extract_trendy_parts(audio_file):
         # Extract tempo and beat frames
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
-        # Convert beat frames to timestamps
-        beat_times = librosa.frames_to_time(beat_frames, sr=sr)
+        # Extract additional features
+        spectral_contrast = librosa.feature.spectral_contrast(y=y, sr=sr)
+        chroma = librosa.feature.chroma_stft(y=y, sr=sr)
+        mfcc = librosa.feature.mfcc(y=y, sr=sr)
 
-        if len(beat_times) < 2:
-            log_error("Not enough beat times found.")
-            return None
+        # Combine features into a single matrix
+        features = np.vstack([spectral_contrast, chroma, mfcc])
 
-        # Find the first and last beats
-        start_time = beat_times[0]
-        end_time = beat_times[-1]
+        # Calculate the mean and variance of the features
+        feature_mean = np.mean(features, axis=1)
+        feature_var = np.var(features, axis=1)
+
+        # Identify the most "trendy" parts based on feature variance
+        trendy_indices = np.argsort(feature_var)[-2:]  # Get indices of the two highest variances
+        start_time = beat_frames[trendy_indices[0]] if len(beat_frames) > trendy_indices[0] else 0
+        end_time = beat_frames[trendy_indices[1]] if len(beat_frames) > trendy_indices[1] else len(y) / sr
 
         return start_time, end_time
     except Exception as e:
