@@ -1,0 +1,104 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #191414, #121212);
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.container {
+    background: linear-gradient(135deg, #1db954, #1ed760);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    animation: fadeIn 1s ease-in-out;
+    color: #ffffff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+input[type="text"] {
+    width: 85%;
+    padding: 15px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    color: #191414;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+
+button {
+    padding: 15px 30px;
+    background: #191414;
+    color: #1db954;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #1db954;
+    color: #191414;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.result {
+    margin-top: 25px;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ffffff;
+    animation: fadeIn 1s ease-in-out;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    button {
+        font-size: 1em;
+    }
+    input[type="text"] {
+        font-size: 1em;
+    }
+}
